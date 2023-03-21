@@ -14,33 +14,6 @@ refs.searchInputEl.addEventListener(
   'input',
   debounce(onInputChange, DEBOUNCE_DELAY)
 );
-// function onInputSearch(e) {
-//   const searchElement = e.target.value.trim();
-//   refs.countryList.innerHTML = '';
-//   refs.countryInfo.innerHTML = '';
-
-//   if (searchElement) {
-//     fetchCountries(searchElement)
-//       .then(countries => {
-//         if (countries.length > 10) {
-//           Notify.warning(
-//             'Too many matches found. Please enter a more specific name.'
-//           );
-//           return;
-//         }
-//         if (countries.length > 1) {
-//           renderCountries(countries);
-//           return;
-//         } else {
-//           renderCountry(countries);
-//         }
-//       })
-//       .catch(error => {
-//         Notify.failure('Oops, there is no country with that name');
-//       });
-//   }
-//   return;
-// }
 
 function onInputChange(event) {
   const inputValue = event.target.value.trim();
@@ -59,7 +32,6 @@ function onInputChange(event) {
         renderCountryList(response);
       } else {
         // рендерим карточку страны
-        console.log(response);
         renderCountryInfo(response);
       }
     })
@@ -85,9 +57,6 @@ function renderCountryList(res) {
 function createCountryInfo(countries) {
   return countries
     .map(({ name, flags, capital, population, languages }) => {
-      const { ...lang } = languages;
-      // console.log({ ...lang } = languages)
-      console.log(lang);
       return `<div class="country-info__box"><img class="country-info__img" width="40" src="${flags.svg}" alt="${name.official}">
         <h3 class="country-info__title">${name.official}</h3>
         </div>
