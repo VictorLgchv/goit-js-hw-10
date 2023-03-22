@@ -17,7 +17,8 @@ refs.searchInputEl.addEventListener(
 
 function onInputChange(event) {
   const inputValue = event.target.value.trim();
-  API.fetchCountries(inputValue)
+  if (event.target.value !== '') {
+    API.fetchCountries(inputValue)
     .then(response => {
       refs.countryListEl.innerHTML = '';
       refs.countryInfoEl.innerHTML = '';
@@ -39,6 +40,8 @@ function onInputChange(event) {
       Notify.failure('Oops, there is no country with that name');
       return;
     });
+  }
+  
 }
 
 function createCountryList(countries) {
